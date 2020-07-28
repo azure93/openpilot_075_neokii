@@ -1,0 +1,31 @@
+{
+  "Offroad_ChargeDisabled": {
+    "text": "차량의 시동이 하루이상 꺼져있으면 이온 충전이 불가능 합니다. 시동을 켜서 충전을 시작하세요.",
+    "severity": 0
+  },
+  "Offroad_TemperatureTooHigh": {
+    "text": "이온 온도가 너무 높아서 시스템이 시작되지 않습니다.",
+    "severity": 1
+  },
+  "Offroad_ConnectivityNeededPrompt": {
+    "text": "즉시 네트워크를 연결하여 업데이트를 확인하세요. 그렇지 않으면 자율주행이 활성화되지 않습니다.",
+    "severity": 0,
+    "_comment": "Append the number of days at the end of the text"
+  },
+  "Offroad_ConnectivityNeeded": {
+    "text": "네트워크를 연결하여 업데이트를 확인하세요. 그렇지 않으면 오픈파일럿이 활성화되지 않습니다.",
+    "severity": 1
+  },
+  "Offroad_PandaFirmwareMismatch": {
+    "text": "호환되지 않는 판다 펌웨어 버전입니다. 판다 펌웨어 리플래시 후 이온을 재부팅하세요.",
+    "severity": 1
+  },
+  "Offroad_InvalidTime": {
+    "text": "잘못된 날짜 및 시간설정으로 시스템이 시작되지 않습니다. 네트워크에 연결하여 날짜 및 시간설정을 진행하세요",
+    "severity": 1
+  },
+  "Offroad_IsTakingSnapshot": {
+    "text": "카메라 스냅샷 촬영이 완료되지않아 시스템이 시작되지 않습니다.",
+    "severity": 0
+  }
+}
