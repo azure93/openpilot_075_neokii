@@ -103,7 +103,7 @@ def get_ip_address():
     pattern = re.compile(r'inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
     return pattern.search(wlan).group(1)
   except Exception:
-    return "--"
+    return ""
 
 def get_network_type():
   if not ANDROID:
