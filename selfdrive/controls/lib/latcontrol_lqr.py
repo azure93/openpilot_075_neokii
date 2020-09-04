@@ -1,3 +1,4 @@
+from selfdrive.ntune import nTune
 import numpy as np
 from selfdrive.controls.lib.drive_helpers import get_steer_max
 from common.numpy_fast import clip
@@ -25,6 +26,7 @@ class LatControlLQR():
     self.sat_limit = CP.steerLimitTimer
 
     self.reset()
+    self.tune = nTune(CP, self) # Added for utune
 
   def reset(self):
     self.i_lqr = 0.0
@@ -44,10 +46,14 @@ class LatControlLQR():
     return self.sat_count > self.sat_limit
 
   def update(self, active, v_ego, angle_steers, angle_steers_rate, eps_torque, steer_override, rate_limited, CP, path_plan):
+    self.tune.check() # Added for utune
     lqr_log = log.ControlsState.LateralLQRState.new_message()
 
     steers_max = get_steer_max(CP, v_ego)
-    torque_scale = (0.45 + v_ego / 60.0)**2  # Scale actuator model with speed
+    #torque_scale = (0.45 + v_ego / 60.0) ** 2  # Scale actuator model with speed
+    torque_scale = (0.55 + v_ego / 86.0) ** 2
+    #torque_scale = min(torque_scale, 0.616)
+    torque_scale = min(torque_scale, 0.7)
 
     # Subtract offset. Zero angle should correspond to zero torque
     self.angle_steers_des = path_plan.angleSteers - path_plan.angleOffset
