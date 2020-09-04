@@ -546,13 +546,14 @@ void handle_message(UIState *s,  Message* msg) {
     scene.thermalStatus = data.getThermalStatus();
     scene.paTemp = data.getPa0();
 
-    scene.maxCpuTemp = data.getCpu1();
-    if (scene.maxCpuTemp < data.getCpu1())
-      scene.maxCpuTemp = data.getCpu1();
-    else if (scene.maxCpuTemp < data.getCpu2())
-      scene.maxCpuTemp = data.getCpu2();
-    else if (scene.maxCpuTemp < data.getCpu3())
-      scene.maxCpuTemp = data.getCpu3();
+    scene.maxCpuTemp = (data.getCpu0() + data.getCpu1() + data.getCpu2() + data.getCpu3()) / 4;
+    //scene.maxCpuTemp = data.getCpu1();
+    //if (scene.maxCpuTemp < data.getCpu1())
+    //  scene.maxCpuTemp = data.getCpu1();
+    //else if (scene.maxCpuTemp < data.getCpu2())
+    //  scene.maxCpuTemp = data.getCpu2();
+    //else if (scene.maxCpuTemp < data.getCpu3())
+    //  scene.maxCpuTemp = data.getCpu3();
 
     scene.maxBatTemp = data.getBat();
 
@@ -572,6 +573,11 @@ void handle_message(UIState *s,  Message* msg) {
   {
     auto data = event.getCarState();
     scene.brakeLights = data.getBrakeLights();
+    scene.engineRPM = data.getEngineRPM();
+    if(scene.leftBlinker!=data.getLeftBlinker() || scene.rightBlinker!=data.getRightBlinker())
+      scene.blinker_blinkingrate = 100;
+    scene.leftBlinker = data.getLeftBlinker();
+    scene.rightBlinker = data.getRightBlinker();
   }
   else if (which == cereal::Event::UBLOX_GNSS) {
     auto data = event.getUbloxGnss();
@@ -1067,6 +1073,7 @@ int main(int argc, char* argv[]) {
     // Don't waste resources on drawing in case screen is off
     if (s->awake) {
       dashcam(s, touch_x, touch_y);
+      draw_date_time(s);
       ui_draw(s);
       glFinish();
       should_swap = true;

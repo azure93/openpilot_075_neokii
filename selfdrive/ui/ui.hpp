@@ -116,6 +116,10 @@ typedef struct UIScene {
   bool speedlimit_valid;
   bool map_valid;
 
+  bool leftBlinker;
+  bool rightBlinker;
+  int blinker_blinkingrate;
+
   float curvature;
   int engaged;
   bool engageable;
@@ -148,6 +152,7 @@ typedef struct UIScene {
   float alert_blinkingrate;
 
   float awareness_status;
+  float engineRPM;
 
   // Used to show gps planner status
   bool gps_planner_active;

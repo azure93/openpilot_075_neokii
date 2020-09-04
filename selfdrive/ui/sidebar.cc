@@ -40,7 +40,7 @@ static void ui_draw_sidebar_network_strength(UIState *s) {
 
 static void ui_draw_sidebar_battery_icon(UIState *s) {
   const int battery_img_h = 36;
-  const int battery_img_w = 76;
+  const int battery_img_w = 76+5;
   const int battery_img_x = !s->scene.uilayout_sidebarcollapsed ? 160 : -(sbr_w);
   const int battery_img_y = 255;
 
@@ -52,26 +52,41 @@ static void ui_draw_sidebar_battery_icon(UIState *s) {
   ui_draw_image(s->vg, battery_img_x, battery_img_y, battery_img_w, battery_img_h, battery_img, 1.0f);
 }
 
+static void ui_draw_sidebar_battery_text(UIState *s) {
+  const int battery_img_h = 36;
+  const int battery_img_w = 96+50;
+  const int battery_img_x = !s->scene.uilayout_sidebarcollapsed ? 130 : -(sbr_w);
+  const int battery_img_y = 273;
+
+  char battery_str[7];
+  snprintf(battery_str, sizeof(battery_str), "%d%%%s ", s->scene.batteryPercent, s->scene.batteryCharging ? "(+)" : "(-)");
+  nvgFillColor(s->vg, COLOR_WHITE);
+  nvgFontSize(s->vg, 40);
+  nvgFontFace(s->vg, "sans-regular");
+  nvgTextAlign(s->vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
+  nvgTextBox(s->vg, battery_img_x, battery_img_y, battery_img_w, battery_str, NULL);
+}
+
 static void ui_draw_sidebar_network_type(UIState *s) {
   static std::map<cereal::ThermalData::NetworkType, const char *> network_type_map = {
       {cereal::ThermalData::NetworkType::NONE, "--"},
       {cereal::ThermalData::NetworkType::WIFI, "WiFi"},
       {cereal::ThermalData::NetworkType::CELL2_G, "2G"},
       {cereal::ThermalData::NetworkType::CELL3_G, "3G"},
-      {cereal::ThermalData::NetworkType::CELL4_G, "4G"},
+      {cereal::ThermalData::NetworkType::CELL4_G, "LTE"},
       {cereal::ThermalData::NetworkType::CELL5_G, "5G"}};
-  const int network_x = !s->scene.uilayout_sidebarcollapsed ? 50 : -(sbr_w);
+  const int network_x = !s->scene.uilayout_sidebarcollapsed ? 30 : -(sbr_w);
   const int network_y = 273;
   const int network_w = 100;
   const int network_h = 100;
   const char *network_type = network_type_map[s->scene.networkType];
   nvgFillColor(s->vg, COLOR_WHITE);
-  nvgFontSize(s->vg, 48);
+  nvgFontSize(s->vg, 40);
   nvgFontFaceId(s->vg, s->font_sans_regular);
   nvgTextAlign(s->vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
   nvgTextBox(s->vg, network_x, network_y, network_w, network_type ? network_type : " ", NULL);
-  nvgFontSize(s->vg, 30);
-  nvgTextBox(s->vg, network_x-25, network_y + 40, 250, s->scene.wifiIpAddress.c_str(), NULL);
+  nvgFontSize(s->vg, 35);
+  nvgTextBox(s->vg, network_x-50, network_y + 55, 340, s->scene.wifiIpAddress.c_str(), NULL);
 }
 
 static void ui_draw_sidebar_metric(UIState *s, const char* label_str, const char* value_str, const int severity, const int y_offset, const char* message_str) {
@@ -128,7 +143,7 @@ static void ui_draw_sidebar_temp_metric(UIState *s) {
   char temp_label_str[32];
   char temp_value_str[32];
   char temp_value_unit[32];
-  const int temp_y_offset = 0;
+  const int temp_y_offset = 30;
   snprintf(temp_value_str, sizeof(temp_value_str), "%d", s->scene.paTemp);
   snprintf(temp_value_unit, sizeof(temp_value_unit), "%s", "°C");
   snprintf(temp_label_str, sizeof(temp_label_str), "%s", "온도");
@@ -140,18 +155,18 @@ static void ui_draw_sidebar_temp_metric(UIState *s) {
 static void ui_draw_sidebar_panda_metric(UIState *s) {
   int panda_severity;
   char panda_message_str[32];
-  const int panda_y_offset = 32 + 148;
+  const int panda_y_offset = 32 + 148 + 30;
 
   if (s->scene.hwType == cereal::HealthData::HwType::UNKNOWN) {
     panda_severity = 2;
-    snprintf(panda_message_str, sizeof(panda_message_str), "%s", "판다\n연결안됨");
+    snprintf(panda_message_str, sizeof(panda_message_str), "%s", "판다\n미연결");
   } else {
     if (s->started){
       if (s->scene.satelliteCount < 6) {
-        panda_severity = 1;
-        snprintf(panda_message_str, sizeof(panda_message_str), "%s", "판다\nNO GPS");
-      } else if (s->scene.satelliteCount >= 6) {
         panda_severity = 0;
+        snprintf(panda_message_str, sizeof(panda_message_str), "%s", "백판다\n연결됨");
+      } else if (s->scene.satelliteCount >= 6) {
+        panda_severity = 1;
         snprintf(panda_message_str, sizeof(panda_message_str), "%s", "판다\nGOOD GPS");
       }
     } else {
@@ -165,11 +180,11 @@ static void ui_draw_sidebar_panda_metric(UIState *s) {
 
 static void ui_draw_sidebar_connectivity(UIState *s) {
   if (s->scene.athenaStatus == NET_DISCONNECTED) {
-    ui_draw_sidebar_metric(s, NULL, NULL, 1, 180+158, "네트워크\n연결안됨");
+    ui_draw_sidebar_metric(s, NULL, NULL, 1, 190+158+20, "네트워크\n미연결");
   } else if (s->scene.athenaStatus == NET_CONNECTED) {
-    ui_draw_sidebar_metric(s, NULL, NULL, 0, 180+158, "네트워크\n연결됨");
+    ui_draw_sidebar_metric(s, NULL, NULL, 0, 190+158+20, "네트워크\n연결됨");
   } else {
-    ui_draw_sidebar_metric(s, NULL, NULL, 2, 180+158, "네트워크\n에러");
+    ui_draw_sidebar_metric(s, NULL, NULL, 2, 190+158+20, "네트워크\n에러");
   }
 }
 
@@ -181,8 +196,9 @@ void ui_draw_sidebar(UIState *s) {
   ui_draw_sidebar_settings_button(s);
   ui_draw_sidebar_home_button(s);
   ui_draw_sidebar_network_strength(s);
-  ui_draw_sidebar_battery_icon(s);
+  //ui_draw_sidebar_battery_icon(s);
   ui_draw_sidebar_network_type(s);
+  ui_draw_sidebar_battery_text(s);
   ui_draw_sidebar_temp_metric(s);
   ui_draw_sidebar_panda_metric(s);
   ui_draw_sidebar_connectivity(s);
