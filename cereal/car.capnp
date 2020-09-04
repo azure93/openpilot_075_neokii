@@ -142,6 +142,9 @@ struct CarState {
   stockFcw @31 :Bool;
   espDisabled @32 :Bool;
 
+  # engine rpm
+  engineRPM @37 :Float32;
+
   # cruise state
   cruiseState @10 :CruiseState;
 
@@ -323,6 +326,8 @@ struct CarControl {
       chimeWarningRepeat @6;
       chimePrompt @7;
       chimeWarning2Repeat @8;
+      chimeEngage2 @9;
+      chimeDisengage2 @10;
     }
   }
 }
