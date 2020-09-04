@@ -147,6 +147,25 @@ def handle_fan_uno(max_cpu_temp, bat_temp, fan_speed, ignition):
 
   return new_speed
 
+def check_car_battery_voltage(should_start, health, charging_disabled, msg):
+
+  # charging disallowed if:
+  #   - there are health packets from panda, and;
+  #   - 12V battery voltage is too low, and;
+  #   - onroad isn't started
+  print(health)
+  
+  if charging_disabled and (health is None or health.health.voltage > (int(11800)+500)) and msg.thermal.batteryPercent < int(60):
+    charging_disabled = False
+    os.system('echo "1" > /sys/class/power_supply/battery/charging_enabled')
+  elif not charging_disabled and (msg.thermal.batteryPercent > int(70) or (health is not None and health.health.voltage < int(11800) and not should_start)):
+    charging_disabled = True
+    os.system('echo "0" > /sys/class/power_supply/battery/charging_enabled')
+  elif msg.thermal.batteryCurrent < 0 and msg.thermal.batteryPercent > int(70):
+    charging_disabled = True
+    os.system('echo "0" > /sys/class/power_supply/battery/charging_enabled')
+
+  return charging_disabled
 
 def thermald_thread():
   # prevent LEECO from undervoltage
@@ -159,6 +178,7 @@ def thermald_thread():
   health_sock = messaging.sub_sock('health', timeout=health_timeout)
   location_sock = messaging.sub_sock('gpsLocation')
 
+  # 'True' run drive mode ui without panda
   ignition = False
   fan_speed = 0
   count = 0
@@ -180,6 +200,7 @@ def thermald_thread():
   health_prev = None
   fw_version_match_prev = True
   current_connectivity_alert = None
+  charging_disabled = False
   time_valid_prev = True
   should_start_prev = False
   handle_fan = None
@@ -396,6 +417,17 @@ def thermald_thread():
       if msg.thermal.batteryPercent < BATT_PERC_OFF and msg.thermal.batteryStatus == "Discharging" and \
          started_seen and (sec_since_boot() - off_ts) > 60:
         os.system('LD_LIBRARY_PATH="" svc power shutdown')
+
+
+    # battery charge level mode
+    charging_disabled = check_car_battery_voltage(should_start, health, charging_disabled, msg)
+
+    if msg.thermal.batteryCurrent > 0:
+      msg.thermal.batteryStatus = "Discharging"
+    else:
+      msg.thermal.batteryStatus = "Charging"
+    
+    msg.thermal.chargingDisabled = charging_disabled
 
     # Offroad power monitoring
     pm.calculate(health)
