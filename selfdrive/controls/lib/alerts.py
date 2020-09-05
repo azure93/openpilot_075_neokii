@@ -60,7 +60,7 @@ class Alert():
 ALERTS = [
   Alert(
       "turningIndicatorOn",
-      "방향등 동작중엔 핸들조향 꺼짐",
+      "방향지시등 동작중엔 핸들조향 꺼짐",
       "",
       AlertStatus.userPrompt, AlertSize.small,
       Priority.HIGH, VisualAlert.none, AudibleAlert.none, 0., 0., .1),
@@ -182,7 +182,7 @@ ALERTS = [
       "자율주행이 준비 되었습니다",
       "항상 핸들을 잡고 도로를 주시하세요",
       AlertStatus.normal, AlertSize.mid,
-      Priority.LOWER, VisualAlert.none, AudibleAlert.none, 4., 0., 15.),
+      Priority.LOWER, VisualAlert.none, AudibleAlert.chimeEngage2, 1., 0., 5.),
 
   Alert(
       "startupMaster",
@@ -196,7 +196,7 @@ ALERTS = [
       "대시캠 모드",
       "항상 핸들을 잡고 도로를 주시하세요",
       AlertStatus.normal, AlertSize.mid,
-      Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., 15.),
+      Priority.LOWER, VisualAlert.none, AudibleAlert.chimeDisengage2, 1., 0., 15.),
 
   Alert(
       "startupNoCar",
