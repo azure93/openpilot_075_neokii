@@ -190,9 +190,9 @@ void draw_date_time(UIState *s) {
 
   // Draw the current date/time
 
-  int rect_w = 465;
-  int rect_h = 80;
-  int rect_x = (1920-rect_w)/2;
+  int rect_w = 385;
+  int rect_h = 70; 
+  int rect_x = (1920-rect_w);
   int rect_y = (1080-rect_h-10);
 
   // Get local time to display
@@ -200,15 +200,15 @@ void draw_date_time(UIState *s) {
   struct tm tm = get_time_struct();
   snprintf(now,sizeof(now),"%04d/%02d/%02d  %02d:%02d:%02d", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-  nvgBeginPath(s->vg);
-    nvgRoundedRect(s->vg, rect_x, rect_y, rect_w, rect_h, 15);
-    nvgFillColor(s->vg, nvgRGBA(0, 0, 0, 100));
-    nvgFill(s->vg);
-    nvgStrokeColor(s->vg, nvgRGBA(255,255,255,80));
-    nvgStrokeWidth(s->vg, 6);
-    nvgStroke(s->vg);
+//  nvgBeginPath(s->vg);
+//    nvgRoundedRect(s->vg, rect_x, rect_y, rect_w, rect_h, 15);
+//    nvgFillColor(s->vg, nvgRGBA(0, 0, 0, 100));
+//    nvgFill(s->vg);
+//    nvgStrokeColor(s->vg, nvgRGBA(255,255,255,80));
+//    nvgStrokeWidth(s->vg, 6);
+//    nvgStroke(s->vg);
 
-  nvgFontSize(s->vg, 60);
+  nvgFontSize(s->vg, 30);
     nvgFontFace(s->vg, "sans-semibold");
     nvgFillColor(s->vg, nvgRGBA(255, 255, 255, 200));
     nvgText(s->vg,rect_x+231,rect_y+55,now,NULL);
@@ -226,7 +226,7 @@ void draw_lock_button(UIState *s) {
   int btn_w = 150;
   int btn_h = 150;
   int btn_x = 1920 - btn_w - 150;
-  int btn_y = 1080 - btn_h;
+  int btn_y = 1080 - btn_h - 40;
   int imgw, imgh;
   float alpha = 0.3f;
 
@@ -266,14 +266,14 @@ static void screen_draw_button(UIState *s, int touch_x, int touch_y) {
     int btn_w = 150;
     int btn_h = 150;
     int btn_x = 1920 - btn_w;
-    int btn_y = 1080 - btn_h;
+    int btn_y = 1080 - btn_h - 40;
     nvgBeginPath(s->vg);
       nvgRoundedRect(s->vg, btn_x-110, btn_y-45, btn_w, btn_h, 100);
       nvgStrokeColor(s->vg, nvgRGBA(255,255,255,80));
-      nvgStrokeWidth(s->vg, 6);
+      nvgStrokeWidth(s->vg, 7);
       nvgStroke(s->vg);
-
-      nvgFontSize(s->vg, 70);
+      nvgFontFace(s->vg, "sans-semibold");
+      nvgFontSize(s->vg, 65);
 
       if (captureState == CAPTURE_STATE_CAPTURING) {
         NVGcolor fillColor = nvgRGBA(255,0,0,150);
@@ -339,12 +339,11 @@ void dashcam( UIState *s, int touch_x, int touch_y ) {
   } else if (!s->scene.engageable) {
     stop_capture();
   }
-
 //  if (s->scene.v_ego > 2.1 && captureState == CAPTURE_STATE_NOT_CAPTURING && !s->scene.engaged) {
 //    start_capture();
 //  } else if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
-//  if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
-//    stop_capture();
-//  }
+  //if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
+  //  stop_capture();
+  //}
   s->scene.recording = (captureState != CAPTURE_STATE_NOT_CAPTURING);
 }
