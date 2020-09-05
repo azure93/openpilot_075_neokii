@@ -568,7 +568,7 @@ void handle_message(UIState *s,  Message* msg) {
   else if (which == cereal::Event::CAR_CONTROL){
     auto data = event.getCarControl();
     scene.actuators = data.getActuators();
-  }
+  } 
   else if (which == cereal::Event::CAR_STATE)
   {
     auto data = event.getCarState();
@@ -578,6 +578,13 @@ void handle_message(UIState *s,  Message* msg) {
       scene.blinker_blinkingrate = 100;
     scene.leftBlinker = data.getLeftBlinker();
     scene.rightBlinker = data.getRightBlinker();
+  }
+  else if (which == cereal::Event::PATH_PLAN)
+  {
+    auto data = event.getPathPlan();
+    scene.laneWidth = data.getLaneWidth();
+    scene.l_prob = data.getLProb();
+    scene.r_prob = data.getRProb();
   }
   else if (which == cereal::Event::UBLOX_GNSS) {
     auto data = event.getUbloxGnss();
