@@ -204,7 +204,10 @@ typedef struct UIScene {
 
   cereal::ControlsState::LateralINDIState::Reader indi;
   cereal::ControlsState::LateralLQRState::Reader lqr;
-
+  
+  float laneWidth, l_prob, r_prob;
+  
+  
 } UIScene;
 
 typedef struct {
