@@ -196,7 +196,7 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 1685. + STD_CARGO_KG
       ret.wheelbase = 2.885
       ret.steerRatio = 13.7
-      ret.steerActuatorDelay = 0.2
+      ret.steerActuatorDelay = 0.3
       ret.steerRateCost = 0.5
       ret.steerLimitTimer = 0.6
       ret.lateralTuning.init('lqr')
