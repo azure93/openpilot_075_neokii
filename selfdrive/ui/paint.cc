@@ -648,9 +648,9 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
     char val_str[16];
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
-      if((int)(scene->paTemp) > 50) {
+      if((int)(scene->paTemp) > 65) {
         val_color = nvgRGBA(255, 0, 0, 200);
-      } else if((int)(scene->paTemp) > 45) {
+      } else if((int)(scene->paTemp) > 60) {
         val_color = nvgRGBA(255, 188, 3, 200);
       }
       snprintf(val_str, sizeof(val_str), "%d°C", (int)(scene->paTemp));
