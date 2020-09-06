@@ -528,11 +528,10 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
     if ((int)scene->laneWidth) {
-      if((scene->laneWidth) < 1) {
-        val_color = nvgRGBA(255, 188, 3, 200);
-      }
-      if((scene->laneWidth) < 1.5) {
+      if((scene->laneWidth) < 2.95) {
         val_color = nvgRGBA(255, 0, 0, 200);
+      } else if((scene->laneWidth) < 3.2) {
+        val_color = nvgRGBA(255, 188, 3, 200);
       }
       // lead car relative speed is always in meters
       snprintf(val_str, sizeof(val_str), "%.1f", scene->laneWidth);

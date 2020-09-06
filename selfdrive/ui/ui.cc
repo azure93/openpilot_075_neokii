@@ -232,7 +232,7 @@ static void ui_init(UIState *s) {
   s->gpsLocationExternal_sock = SubSocket::create(s->ctx, "gpsLocationExternal");
   s->carstate_sock = SubSocket::create(s->ctx, "carState");
   s->liveParameters_sock = SubSocket::create(s->ctx, "liveParameters");
-
+  s->pathPlan_sock = SubSocket::create(s->ctx, "pathPlan");
 
 
   assert(s->model_sock != NULL);
@@ -250,6 +250,7 @@ static void ui_init(UIState *s) {
   assert(s->gpsLocationExternal_sock != NULL);
   assert(s->carstate_sock != NULL);
   assert(s->liveParameters_sock != NULL);
+  assert(s->pathPlan_sock != NULL);
 
   s->poller = Poller::create({
                               s->model_sock,
@@ -265,7 +266,8 @@ static void ui_init(UIState *s) {
                               s->carcontrol_sock,
                               s->gpsLocationExternal_sock,
                               s->carstate_sock,
-                              s->liveParameters_sock
+                              s->liveParameters_sock,
+                              s->pathPlan_sock
                              });
 
 #ifdef SHOW_SPEEDLIMIT

@@ -269,6 +269,7 @@ typedef struct UIState {
   SubSocket *gpsLocationExternal_sock;
   SubSocket *carstate_sock;
   SubSocket *liveParameters_sock;
+  SubSocket *pathPlan_sock;
 
   Poller * poller;
   Poller * ublox_poller;
