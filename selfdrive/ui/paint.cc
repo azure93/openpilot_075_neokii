@@ -249,6 +249,7 @@ static void ui_draw_track(UIState *s, bool is_mpc, track_vertices_data *pvd) {
   nvgFill(s->vg);
 }
 
+
 static void draw_steering(UIState *s, float curvature) {
   float points[50];
   for (int i = 0; i < 50; i++) {
@@ -478,7 +479,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
        val_color = nvgRGBA(180, 180, 180, 200);
        snprintf(val_str, sizeof(val_str), "-");
     }
-    snprintf(uom_str, sizeof(uom_str), "m   ");
+    snprintf(uom_str, sizeof(uom_str), "m");
     bb_h +=bb_ui_draw_measure(s,  val_str, uom_str, "차간거리",
         bb_rx, bb_ry, bb_uom_dx,
         val_color, lab_color, uom_color,
@@ -563,7 +564,7 @@ static void bb_ui_draw_measures_left(UIState *s, int bb_x, int bb_y, int bb_w ) 
       // steering is in degrees
       snprintf(val_str, sizeof(val_str), "%.1f",(scene->angleSteers));
 
-      snprintf(uom_str, sizeof(uom_str), "°");
+      snprintf(uom_str, sizeof(uom_str), " °");
     bb_h +=bb_ui_draw_measure(s,  val_str, uom_str, "현재조향",
         bb_rx, bb_ry, bb_uom_dx,
         val_color, lab_color, uom_color,
@@ -625,6 +626,7 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
   //add CPU temperature
   if (true) {
     char val_str[16];
+    char val2_str[16];
     char uom_str[6];
     NVGcolor val_color = nvgRGBA(255, 255, 255, 200);
       if((int)(scene->maxCpuTemp/10) > 80) {
@@ -635,8 +637,9 @@ static void bb_ui_draw_measures_right(UIState *s, int bb_x, int bb_y, int bb_w )
       }
       // temp is alway in C * 10
       snprintf(val_str, sizeof(val_str), "%d°C", (int)(scene->maxCpuTemp/10));
+      snprintf(val2_str, sizeof(val2_str), "CPU %d%%", (int)(scene->cpuPerc));
       snprintf(uom_str, sizeof(uom_str), "");
-    bb_h +=bb_ui_draw_measure(s,  val_str, uom_str, "CPU온도",
+    bb_h +=bb_ui_draw_measure(s,  val_str, uom_str, val2_str,
         bb_rx, bb_ry, bb_uom_dx,
         val_color, lab_color, uom_color,
         value_fontSize, label_fontSize, uom_fontSize );

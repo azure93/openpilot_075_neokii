@@ -556,7 +556,7 @@ void handle_message(UIState *s,  Message* msg) {
     //  scene.maxCpuTemp = data.getCpu2();
     //else if (scene.maxCpuTemp < data.getCpu3())
     //  scene.maxCpuTemp = data.getCpu3();
-
+    scene.cpuPerc = data.getCpuPerc();
     scene.maxBatTemp = data.getBat();
 
     s->thermal_started = data.getStarted();
