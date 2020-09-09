@@ -856,7 +856,7 @@ static void bb_ui_draw_UI(UIState *s)
 
   bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y, bb_dml_w);
   bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y, bb_dmr_w);
-  bb_ui_draw_L_Extra(s);
+  // bb_ui_draw_L_Extra(s);
 }
 
 static void ui_draw_vision_maxspeed(UIState *s) {
@@ -917,8 +917,10 @@ static void ui_draw_vision_maxspeed(UIState *s) {
   } else {
     ui_draw_text(s->vg, text_x, 242, "---", 40 * 2.5, COLOR_WHITE_ALPHA(100), s->font_sans_semibold);
   }
-
-  bb_ui_draw_UI(s);
+ 
+  if (!s->scene.uilayout_bbuidraw) {
+    bb_ui_draw_UI(s);
+  }
 }
 
 static void ui_draw_vision_speedlimit(UIState *s) {

@@ -182,6 +182,16 @@ bool screen_button_clicked(int touch_x, int touch_y) {
   return false;
 }
 
+bool screen_bbuidraw_clicked(int touch_x, int touch_y) {
+  if (touch_x >= 1660 && touch_x <= 1810) {
+    if (touch_y >= 300 && touch_y <= 830) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 void draw_date_time(UIState *s) {
   if (captureState == CAPTURE_STATE_NOT_CAPTURING) {
     // Don't draw if we're not recording
@@ -330,6 +340,10 @@ void dashcam( UIState *s, int touch_x, int touch_y ) {
     }
   }
 
+  if (screen_bbuidraw_clicked(touch_x, touch_y)) {
+    s->scene.uilayout_bbuidraw = !s->scene.uilayout_bbuidraw;
+  }
+
   if (screen_lock_button_clicked(touch_x,touch_y,lock_button)) {
     screen_toggle_lock();
   }
@@ -339,6 +353,7 @@ void dashcam( UIState *s, int touch_x, int touch_y ) {
   } else if (!s->scene.engageable && s->scene.v_ego < 1.5) {
     stop_capture();
   }
+
 //  if (s->scene.v_ego > 2.1 && captureState == CAPTURE_STATE_NOT_CAPTURING && !s->scene.engaged) {
 //    start_capture();
 //  } else if (s->scene.v_ego < 1.5 && !s->scene.engaged) {

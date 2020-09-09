@@ -123,7 +123,7 @@ static void handle_driver_view_touch(UIState *s, int touch_x, int touch_y) {
 }
 
 static void handle_vision_touch(UIState *s, int touch_x, int touch_y) {
-  if (s->started && (touch_x >= s->scene.ui_viz_rx - bdr_s)
+  if (s->started && (touch_x >= s->scene.ui_viz_rx - bdr_s) && (touch_x < 1660)
     && (s->active_app != cereal::UiLayoutState::App::SETTINGS)) {
     if (!s->scene.frontview) {
       s->scene.uilayout_sidebarcollapsed = !s->scene.uilayout_sidebarcollapsed;
