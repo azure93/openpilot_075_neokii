@@ -1810,7 +1810,6 @@ struct UiLayoutState {
   sidebarCollapsed @1 :Bool;
   mapEnabled @2 :Bool;
   mockEngaged @3 :Bool;
-  bbuidraw @4 :Bool;
 
   enum App {
     home @0;
