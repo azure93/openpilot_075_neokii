@@ -575,7 +575,6 @@ void handle_message(UIState *s,  Message* msg) {
   {
     auto data = event.getCarState();
     scene.brakeLights = data.getBrakeLights();
-    scene.engineRPM = data.getEngineRPM();
     if(scene.leftBlinker!=data.getLeftBlinker() || scene.rightBlinker!=data.getRightBlinker())
       scene.blinker_blinkingrate = 100;
     scene.leftBlinker = data.getLeftBlinker();
