@@ -55,7 +55,6 @@ class CarState(CarStateBase):
     ret.steeringTorqueEps = cp_mdps.vl["MDPS12"]['CR_Mdps_OutTq']
     ret.steeringPressed = abs(ret.steeringTorque) > STEER_THRESHOLD
     ret.steerWarning = cp_mdps.vl["MDPS12"]['CF_Mdps_ToiUnavail'] != 0
-    ret.engineRPM = cp.vl["EMS11"]['N']
 
     # cruise state
     ret.cruiseState.enabled = (cp_scc.vl["SCC12"]['ACCMode'] != 0) if not self.no_radar else \
@@ -162,8 +161,7 @@ class CarState(CarStateBase):
   def get_can_parser(CP):
 
     signals = [
-      # sig_name, sig_address, default, engineRPM
-      ("N", "EMS11", 0),
+      # sig_name, sig_address, default
       ("WHL_SPD_FL", "WHL_SPD11", 0),
       ("WHL_SPD_FR", "WHL_SPD11", 0),
       ("WHL_SPD_RL", "WHL_SPD11", 0),
