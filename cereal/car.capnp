@@ -142,9 +142,6 @@ struct CarState {
   stockFcw @31 :Bool;
   espDisabled @32 :Bool;
 
-  # engine rpm
-  engineRPM @37 :Float32;
-
   # cruise state
   cruiseState @10 :CruiseState;
 
