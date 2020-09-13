@@ -102,7 +102,7 @@ ALERTS = [
 
   Alert(
       "steerSaturated",
-      "핸들조향 제한을 초과",
+      "핸들조향 제한 초과",
       "핸들을 조작하세요",
       AlertStatus.userPrompt, AlertSize.small,
       Priority.LOW, VisualAlert.steerRequired, AudibleAlert.chimePrompt, 1., 2., 3.),
