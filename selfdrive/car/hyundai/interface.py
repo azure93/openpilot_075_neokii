@@ -194,11 +194,11 @@ class CarInterface(CarInterfaceBase):
     elif candidate == CAR.K7_HYBRID:
       tire_stiffness_factor = 0.9
       ret.mass = 1685. + STD_CARGO_KG
-      ret.wheelbase = 2.885
-      ret.steerRatio = 13.7
-      ret.steerActuatorDelay = 0.3
+      ret.wheelbase = 2.855
+      ret.steerRatio = 14.4
+      ret.steerActuatorDelay = 0.1
       ret.steerRateCost = 0.5
-      ret.steerLimitTimer = 0.6
+      ret.steerLimitTimer = 0.4
       ret.lateralTuning.init('lqr')
       ret.lateralTuning.lqr.scale = 2000.0
       ret.lateralTuning.lqr.ki = 0.03
@@ -235,7 +235,7 @@ class CarInterface(CarInterfaceBase):
 
     # steer, gas, brake limitations VS speed
     ret.steerMaxBP = [0.]
-    ret.steerMaxV = [1.0]
+    ret.steerMaxV = [1.5]
     ret.gasMaxBP = [0.]
     ret.gasMaxV = [0.5]
     ret.brakeMaxBP = [0., 20.]
