@@ -196,11 +196,11 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 1685. + STD_CARGO_KG
       ret.wheelbase = 2.855
       ret.steerRatio = 14.4
-      ret.steerActuatorDelay = 0.1
+      ret.steerActuatorDelay = 0.3
       ret.steerRateCost = 0.5
       ret.steerLimitTimer = 0.4
       ret.lateralTuning.init('lqr')
-      ret.lateralTuning.lqr.scale = 2000.0
+      ret.lateralTuning.lqr.scale = 1850.0
       ret.lateralTuning.lqr.ki = 0.03
       ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
       ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
@@ -235,7 +235,7 @@ class CarInterface(CarInterfaceBase):
 
     # steer, gas, brake limitations VS speed
     ret.steerMaxBP = [0.]
-    ret.steerMaxV = [1.5]
+    ret.steerMaxV = [1.2]
     ret.gasMaxBP = [0.]
     ret.gasMaxV = [0.5]
     ret.brakeMaxBP = [0., 20.]

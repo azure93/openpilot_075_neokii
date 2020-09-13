@@ -1,7 +1,5 @@
 import os
 import math
-
-from common.numpy_fast import interp
 from common.realtime import sec_since_boot, DT_MDL
 from selfdrive.swaglog import cloudlog
 from selfdrive.controls.lib.lateral_mpc import libmpc_py
@@ -96,10 +94,8 @@ class PathPlanner():
 
     # Run MPC
     self.angle_steers_des_prev = self.angle_steers_des_mpc
-
-    x = max(sm['liveParameters'].stiffnessFactor, 0.1)
-    sr = interp(abs(self.angle_steers_des_mpc), [5., 30.], [11.8, 14.0])
-    VM.update_params(x, sr)
+    VM.update_params(sm['liveParameters'].stiffnessFactor, sm['liveParameters'].steerRatio)
+    #VM.update_params(sm['liveParameters'].stiffnessFactor, CP.steerRatio)
 
     curvature_factor = VM.curvature_factor(v_ego)
 
