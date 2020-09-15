@@ -86,6 +86,8 @@ void stop_capture() {
   char videos_dir[50] = "/storage/emulated/0/videos";
 
   if (captureState == CAPTURE_STATE_CAPTURING) {
+    system("find /data/media/0/videos -mtime +7 -delete");
+    system("find /data/media/0/realdata -mtime +7 -delete");
     system("killall -SIGINT screenrecord");
     captureState = CAPTURE_STATE_NOT_CAPTURING;
     elapsed_time = get_time() - start_time;
@@ -298,8 +300,7 @@ static void screen_draw_button(UIState *s, int touch_x, int touch_y) {
   }
 
   if (captureState == CAPTURE_STATE_CAPTURING) {
-    //draw_date_time(s);
-
+    draw_date_time(s);
     elapsed_time = get_time() - start_time;
 
     if (elapsed_time >= RECORD_INTERVAL) {
@@ -350,15 +351,13 @@ void dashcam( UIState *s, int touch_x, int touch_y ) {
   if (!s->vision_connected) {
     // Assume car is not in drive so stop recording
     stop_capture();
-  } else if (!s->scene.engageable && s->scene.v_ego < 1.5) {
+  } else if (!s->scene.engaged && s->scene.v_ego < 1.5) {
     stop_capture();
   }
 
 //  if (s->scene.v_ego > 2.1 && captureState == CAPTURE_STATE_NOT_CAPTURING && !s->scene.engaged) {
 //    start_capture();
 //  } else if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
-  //if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
-  //  stop_capture();
-  //}
+
   s->scene.recording = (captureState != CAPTURE_STATE_NOT_CAPTURING);
 }
