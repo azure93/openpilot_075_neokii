@@ -172,14 +172,14 @@ ALERTS = [
 
   Alert(
       "geofence",
-      "자율주행을 해제하세요",
+      "운전보조를 해제하세요",
       "지오펜스 영역이 아닙니다",
       AlertStatus.userPrompt, AlertSize.mid,
       Priority.HIGH, VisualAlert.steerRequired, AudibleAlert.chimeWarningRepeat, .1, .1, .1),
 
   Alert(
       "startup",
-      "자율주행이 준비 되었습니다",
+      "운전보조가 준비 되었습니다",
       "항상 핸들을 잡고 도로를 주시하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.chimeEngage2, 1., 0., 5.),
@@ -299,84 +299,84 @@ ALERTS = [
   # Non-entry only alerts
   Alert(
       "wrongCarModeNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "메인 스위치 꺼짐",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 0., 3.),
 
   Alert(
       "dataNeededNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "캘리브레이션에 필요한 데이터가 없음 , 주행후 재시도하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 0., 3.),
 
   Alert(
       "outOfSpaceNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "저장공간 부족",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 0., 3.),
 
   Alert(
       "pedalPressedNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "활성화시도중 브레이크 감지됨",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, "brakePressed", AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "speedTooLowNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "속도가 너무 낮음",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "brakeHoldNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "브레이크 감지됨",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "parkBrakeNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "파킹 브레이크 채결됨",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "lowSpeedLockoutNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "크루즈 에러 : 차량을 다시 시작하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "lowBatteryNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "배터리 부족",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "sensorDataInvalidNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "이온센서에 데이터가 없음",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "soundsUnavailableNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "스피커가 없습니다",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "tooDistractedNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "방해 수준이 너무 높음",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
@@ -549,14 +549,14 @@ ALERTS = [
   # not loud cancellations (user is in control)
   Alert(
       "noTarget",
-      "자율주행 취소됨",
+      "주행보조 취소됨",
       "근접 앞차량이 없습니다",
       AlertStatus.normal, AlertSize.mid,
       Priority.HIGH, VisualAlert.none, AudibleAlert.chimeDisengage, 2, 2., 3.),
 
   Alert(
       "speedTooLow",
-      "자율주행 취소됨",
+      "주행보조 취소됨",
       "속도가 너무 낮음",
       AlertStatus.normal, AlertSize.mid,
       Priority.HIGH, VisualAlert.none, AudibleAlert.chimeDisengage, 2, 2., 3.),
@@ -571,168 +571,168 @@ ALERTS = [
   # Cancellation alerts causing non-entry
   Alert(
       "overheatNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "시스템 과열",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "wrongGearNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "기어가 D 상태가 아님",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "calibrationInvalidNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "캘리브레이션 에러 : 이온 위치변경 및 캘리브레이션 재시도",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "calibrationIncompleteNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "캘리브레이션 진행중",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "doorOpenNoEntry",
-      "주율주행 사용불가",
+      "주행보조 사용불가",
       "도어 열림",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "seatbeltNotLatchedNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "안전벨트 미채결",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "espDisabledNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "ESP 꺼짐",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "geofenceNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "지오펜스 영역이 아닙니다",
       AlertStatus.normal, AlertSize.mid,
       Priority.MID, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "radarCanErrorNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "레이더 에러 : 차량을 다시 시작하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "radarFaultNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "레이더 에러 : 차량을 다시 시작하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "posenetInvalidNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "비전 모델 출력 불확실",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "controlsFailedNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "컨트롤 실패",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "canErrorNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "CAN 에러 : 연결상태를 확인하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "steerUnavailableNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "LKAS 에러 : 차량을 다시 시작하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "brakeUnavailableNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "크루즈 에러 : 차량을 다시 시작하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "gasUnavailableNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "Gas 에러 : 차량을 다시 시작하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "reverseGearNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "기어 R 상태",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "cruiseDisabledNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "크루즈 꺼짐",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "noTargetNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "근접 앞차량이 없습니다",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "plannerErrorNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "플래너 솔루션 에러",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
 
   Alert(
       "commIssueNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "프로세스간 통신문제",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeDisengage, 2, 2., 3.),
 
   Alert(
       "radarCommIssueNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "레이더 통신문제",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeDisengage, 2, 2., 3.),
 
   Alert(
       "internetConnectivityNeededNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "네트워크를 연결하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeDisengage, 2, 2., 3.),
 
   Alert(
       "lowMemoryNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "메모리 부족 : 이온을 재부팅하세요",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeDisengage, 2, 2., 3.),
@@ -746,7 +746,7 @@ ALERTS = [
 
   Alert(
       "relayMalfunctionNoEntry",
-      "자율주행 사용불가",
+      "주행보조 사용불가",
       "하네스의 기능장애",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.chimeError, .4, 2., 3.),
@@ -831,7 +831,7 @@ ALERTS = [
 
   Alert(
       "carUnrecognizedPermanent",
-      "대시캠 모드",
+      "블랙박스 모드",
       "차량 인식 불가",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOWER, VisualAlert.none, AudibleAlert.none, 0., 0., .2),
