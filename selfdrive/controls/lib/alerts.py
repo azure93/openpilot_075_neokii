@@ -60,7 +60,7 @@ class Alert():
 ALERTS = [
   Alert(
       "turningIndicatorOn",
-      "방향지시등 동작중엔 핸들조향 꺼짐",
+      "방향지시등 동작중엔 조향보조 꺼짐",
       "",
       AlertStatus.userPrompt, AlertSize.small,
       Priority.HIGH, VisualAlert.none, AudibleAlert.none, 0., 0., .1),
