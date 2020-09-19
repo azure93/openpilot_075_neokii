@@ -822,7 +822,11 @@ static void bb_ui_draw_L_Extra(UIState *s)
 
     y += height;
     snprintf(str, sizeof(str), "rpm: %.4f", (s->scene.engineRPM));
-    ui_draw_text(s->vg, text_x, y, str, 25 * 2.5, COLOR_WHITE_ALPHA(200), s->font_sans_regular);*/
+    ui_draw_text(s->vg, text_x, y, str, 25 * 2.5, COLOR_WHITE_ALPHA(200), s->font_sans_regular);
+
+    snprintf(str, sizeof(str), "gas: %.3f", (s->scene.gas));
+    ui_draw_text(s->vg, text_x, y, str, 25 * 2.5, COLOR_WHITE_ALPHA(200), s->font_sans_regular); */
+
 }
 
 
@@ -839,7 +843,7 @@ static void bb_ui_draw_UI(UIState *s)
 
   bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y, bb_dml_w);
   bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y, bb_dmr_w);
-  // bb_ui_draw_L_Extra(s);
+  bb_ui_draw_L_Extra(s);
 }
 
 static void ui_draw_vision_maxspeed(UIState *s) {
@@ -1165,6 +1169,25 @@ static void ui_draw_vision_brake(UIState *s) {
   nvgFill(s->vg);
 }
 
+static void ui_draw_vision_gas(UIState *s) {
+  const UIScene *scene = &s->scene;
+  const int gas_size = 96;
+  const int gas_x = (scene->ui_viz_rx + (gas_size * 1.5) + (bdr_is * 2)) + 60;
+  const int gas_y = (footer_y + ((footer_h - gas_size) / 2)) + 120;
+
+  nvgBeginPath(s->vg);
+  nvgRect(s->vg, gas_x, gas_y, 15, -150);
+  nvgFillColor(s->vg, nvgRGBA(255,255,255,50));
+  nvgFill(s->vg);
+
+  if (scene->gas > 0) {
+    nvgBeginPath(s->vg);
+    nvgRect(s->vg, gas_x, gas_y, 15, (int)(scene->gas * (-150)));
+    nvgFillColor(s->vg, nvgRGBA(255,0,0,150));
+    nvgFill(s->vg);
+  }
+}
+
 static void ui_draw_vision_header(UIState *s) {
   const UIScene *scene = &s->scene;
   int ui_viz_rx = scene->ui_viz_rx;
@@ -1191,6 +1214,7 @@ static void ui_draw_vision_footer(UIState *s) {
 
   // ui_draw_vision_face(s);
   ui_draw_vision_brake(s);
+  ui_draw_vision_gas(s);
 
 #ifdef SHOW_SPEEDLIMIT
   // ui_draw_vision_map(s);

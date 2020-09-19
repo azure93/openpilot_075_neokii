@@ -182,6 +182,7 @@ typedef struct UIScene {
 
   float angleSteers;
   float angleSteersDes;
+  float gas;
   bool brakeLights;
 
   float pid_p;

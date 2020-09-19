@@ -575,6 +575,7 @@ void handle_message(UIState *s,  Message* msg) {
   {
     auto data = event.getCarState();
     scene.brakeLights = data.getBrakeLights();
+    scene.gas = data.getGas();
     if(scene.leftBlinker!=data.getLeftBlinker() || scene.rightBlinker!=data.getRightBlinker())
       scene.blinker_blinkingrate = 100;
     scene.leftBlinker = data.getLeftBlinker();
@@ -1081,7 +1082,6 @@ int main(int argc, char* argv[]) {
     // Don't waste resources on drawing in case screen is off
     if (s->awake) {
       dashcam(s, touch_x, touch_y);
-      draw_date_time(s);
       ui_draw(s);
       glFinish();
       should_swap = true;
