@@ -240,7 +240,7 @@ void draw_lock_button(UIState *s) {
   int btn_x = 1920 - btn_w - 150;
   int btn_y = 1080 - btn_h - 40;
   int imgw, imgh;
-  float alpha = 0.3f;
+  float alpha = 0.2f;
 
   if (!lock_image) {
     // Load the lock icon
@@ -271,13 +271,13 @@ static void screen_draw_button(UIState *s, int touch_x, int touch_y) {
 //  if (s->vision_connected && s->plus_state == 0) {
   if (s->vision_connected){
 
-    if (captureState == CAPTURE_STATE_CAPTURING) {
-      draw_lock_button(s);
-    }
+//    if (captureState == CAPTURE_STATE_CAPTURING) {
+//      draw_lock_button(s);
+//    }
 
     int btn_w = 150;
     int btn_h = 150;
-    int btn_x = 1920 - btn_w;
+    int btn_x = 1920 - btn_w + 10;
     int btn_y = 1080 - btn_h - 40;
     nvgBeginPath(s->vg);
       nvgRoundedRect(s->vg, btn_x-110, btn_y-45, btn_w, btn_h, 100);
@@ -288,7 +288,7 @@ static void screen_draw_button(UIState *s, int touch_x, int touch_y) {
       nvgFontSize(s->vg, 65);
 
       if (captureState == CAPTURE_STATE_CAPTURING) {
-        NVGcolor fillColor = nvgRGBA(255,0,0,150);
+        NVGcolor fillColor = nvgRGBA(255,0,0,100);
         nvgFillColor(s->vg, fillColor);
         nvgFill(s->vg);
         nvgFillColor(s->vg, nvgRGBA(255,255,255,200));
@@ -348,16 +348,18 @@ void dashcam( UIState *s, int touch_x, int touch_y ) {
   if (screen_lock_button_clicked(touch_x,touch_y,lock_button)) {
     screen_toggle_lock();
   }
-  if (!s->vision_connected) {
-    // Assume car is not in drive so stop recording
-    stop_capture();
-  } else if (!s->scene.engaged && s->scene.v_ego < 1.5) {
+//  if (!s->vision_connected) {
+//    // Assume car is not in drive so stop recording
+//    stop_capture();
+//  } else if (!s->scene.engaged && s->scene.v_ego < 1.5) {
+//    stop_capture();
+//  }
+
+  if (s->scene.v_ego > 2.1 && captureState == CAPTURE_STATE_NOT_CAPTURING && s->scene.engaged) {
+    start_capture();
+  } else if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
     stop_capture();
   }
-
-//  if (s->scene.v_ego > 2.1 && captureState == CAPTURE_STATE_NOT_CAPTURING && !s->scene.engaged) {
-//    start_capture();
-//  } else if (s->scene.v_ego < 1.5 && !s->scene.engaged) {
 
   s->scene.recording = (captureState != CAPTURE_STATE_NOT_CAPTURING);
 }
