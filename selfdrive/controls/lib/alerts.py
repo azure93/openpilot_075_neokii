@@ -62,7 +62,7 @@ ALERTS = [
       "turningIndicatorOn",
       "방향지시등 동작중엔 조향보조 꺼짐",
       "",
-      AlertStatus.userPrompt, AlertSize.small,
+      AlertStatus.normal, AlertSize.none,
       Priority.HIGH, VisualAlert.none, AudibleAlert.none, 0., 0., .1),
   Alert(
       "lkasButtonOff",
@@ -104,8 +104,8 @@ ALERTS = [
       "steerSaturated",
       "핸들조향 제한 초과",
       "핸들을 조작하세요",
-      AlertStatus.userPrompt, AlertSize.small,
-      Priority.LOW, VisualAlert.steerRequired, AudibleAlert.chimePrompt, 1., 2., 3.),
+      AlertStatus.normal, AlertSize.none,
+      Priority.LOW, VisualAlert.none, AudibleAlert.none, 1., 2., 3.),
 
   Alert(
       "steerTempUnavailable",
