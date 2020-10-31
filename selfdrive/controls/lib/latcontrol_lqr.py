@@ -51,7 +51,8 @@ class LatControlLQR():
 
     steers_max = get_steer_max(CP, v_ego)
     torque_scale = (0.45 + v_ego / 60.0) ** 2  # Scale actuator model with speed
-    torque_scale = min(torque_scale, 0.69)
+    torque_scale = min(torque_scale, 0.613611)
+
 
     # Subtract offset. Zero angle should correspond to zero torque
     self.angle_steers_des = path_plan.angleSteers - path_plan.angleOffset
