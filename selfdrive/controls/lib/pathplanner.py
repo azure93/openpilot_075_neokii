@@ -94,8 +94,8 @@ class PathPlanner():
 
     # Run MPC
     self.angle_steers_des_prev = self.angle_steers_des_mpc
-    VM.update_params(sm['liveParameters'].stiffnessFactor, sm['liveParameters'].steerRatio)
-    #VM.update_params(sm['liveParameters'].stiffnessFactor, CP.steerRatio)
+    #VM.update_params(sm['liveParameters'].stiffnessFactor, sm['liveParameters'].steerRatio)
+    VM.update_params(sm['liveParameters'].stiffnessFactor, CP.steerRatio)
 
     curvature_factor = VM.curvature_factor(v_ego)
 
