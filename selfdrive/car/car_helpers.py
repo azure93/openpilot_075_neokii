@@ -80,7 +80,7 @@ def fingerprint(logcan, sendcan, has_relay):
     cached_params = Params().get("CarParamsCache")
     if cached_params is not None:
       cached_params = car.CarParams.from_bytes(cached_params)
-      if cached_params.carName == "mock":
+      if cached_params.carName == "K7_HYBRID":
         cached_params = None
 
     if cached_params is not None and len(cached_params.carFw) > 0 and cached_params.carVin is not VIN_UNKNOWN:
